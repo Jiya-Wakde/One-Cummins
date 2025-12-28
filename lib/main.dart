@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'firebase_options.dart';
 import 'pages/login_page.dart';
 import 'pages/register_page.dart';
@@ -13,6 +14,8 @@ import 'pages/ai_chat_page.dart';
 import 'pages/club_requests_page.dart';
 
 void main() async {
+  await dotenv.load();
+
   WidgetsFlutterBinding.ensureInitialized();
 
   // Debugging: log initialize start and handle errors/timeouts

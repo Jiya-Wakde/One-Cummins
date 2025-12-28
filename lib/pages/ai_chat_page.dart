@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import '../constants.dart';
@@ -19,8 +20,7 @@ class _AiChatPageState extends State<AiChatPage> {
 
   bool _isTyping = false;
 
-  static const String _geminiApiKey =
-      'AIzaSyCN1iMiJyiHOlh5sw9CV9OKl1R3DPfvXP8';
+  static  String? geminiApiKey = dotenv.env['GEMINI_API_KEY'];
 
   @override
   void dispose() {
@@ -188,7 +188,7 @@ Description: ${d['description']}
       final res = await http.post(
         Uri.parse(
           "https://generativelanguage.googleapis.com/v1beta/models/"
-          "gemini-flash-latest:generateContent?key=$_geminiApiKey",
+          "gemini-flash-latest:generateContent?key=$geminiApiKey",
         ),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode({
