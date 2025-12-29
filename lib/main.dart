@@ -12,10 +12,15 @@ import 'pages/home_page.dart';
 import 'pages/feed_page.dart';
 import 'pages/ai_chat_page.dart';
 import 'pages/club_requests_page.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
-  await dotenv.load();
-
+  try {
+    await rootBundle.loadString('assets/.env');
+  } catch (e) {
+    // Running in web — no local env — use backend instead
+  }
+  await dotenv.load(fileName: 'assets/.env');
   WidgetsFlutterBinding.ensureInitialized();
 
   // Debugging: log initialize start and handle errors/timeouts
